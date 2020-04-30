@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
 var Twit = require('twit')
 var config = require('./config')
-var moment = require('moment');
+var moment = require('moment-timezone')
 moment.locale("es")
 
 var T = new Twit(config.twitter_config)
+const client = new Discord.Client();
 var initiate = false
 
 client.on("ready", () => {
@@ -26,7 +26,7 @@ client.on("message", (message) => {
 
                     if (config.twitter_user.includes(id_user)) {
                         var nombre = tweet.user.name
-                        var dia = moment(new Date(tweet.created_at)).format("LLLL")
+                        var dia = moment.tz(new Date(tweet.created_at), "America/Bogota").format("LLLL")
                         message.channel.send(`Nuevo tweet de **${nombre}** el ${dia}. >${config.twitter_tweet_url}${id}`);
                         console.log(`Tweet: ${nombre} - ${tweet.text}`);
                     }
@@ -35,7 +35,7 @@ client.on("message", (message) => {
                 message.channel.send("Ya estoy encendido... :rage:", { files: [config.images.already] });
             }
         } else if (message.content.startsWith("$bot test")) {
-            message.channel.send("Test de imagenes... :rage:", { files: [config.images.test] });
+            message.channel.send("Test de imagenes... :nerd:", { files: [config.images.test] });
         } else {
             message.channel.send("Comando desconocido.");
         }
