@@ -1,4 +1,5 @@
 config = {
+    discord_bot: "...", // Bot Discord TOKEN
     // mode: "./config/elon", //ELON BOT
     mode: "./config/shit", //SHIT BOT
     twitter: { // Twitter dev tools credentials

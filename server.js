@@ -57,4 +57,4 @@ client.on("message", (message) => {
 /**
  * Conexión al bot de discord
  */
-client.login(config.discord_bot);
+client.login(config_base.discord_bot);

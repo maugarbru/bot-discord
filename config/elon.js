@@ -1,6 +1,5 @@
 const comando = "$bot "
 config = {
-    discord_bot: "...", // Bot Discord TOKEN
     users: ["44196397"],
     comandos: {
         base: comando,
