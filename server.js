@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
 var Twit = require('twit')
 var config_base = require('./config/base')
-var config = require(`./config/${config_base.mode}`)
+var config = require(config_base.mode)
 var moment = require('moment-timezone')
 moment.locale("es")
 
-// Inicio de conexiones
+// Inicio de conexiones y configuración
 var T = new Twit(config_base.twitter)
 const client = new Discord.Client();
 var initiate = false

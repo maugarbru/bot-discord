@@ -1,6 +1,6 @@
 config = {
-    // mode = "elon",
-    mode = "shit",
+    // mode: "./config/elon", //ELON BOT
+    mode: "./config/shit", //SHIT BOT
     twitter: { // Twitter dev tools credentials
         consumer_key: '...', 
         consumer_secret: '...',

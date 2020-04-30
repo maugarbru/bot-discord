@@ -1,10 +1,11 @@
+const comando = "$bot "
 config = {
     discord_bot: "...", // Bot Discord TOKEN
     users: ["44196397"],
     comandos: {
-        base: "$bot ",
-        start: base + "start",
-        test: base + "test",
+        base: comando,
+        start: comando + "start",
+        test: comando + "test",
     },
     mensajes: {
         init: "ElonBOT despierto. Esperando mensajes :)",

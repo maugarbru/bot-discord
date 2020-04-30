@@ -1,10 +1,11 @@
+const comando = "$bot "
 config = {
     discord_bot: "...", // Bot Discord TOKEN
     users: ["1026491831398354946", "1034055823272685568", "1162134936578600960", "746754538284134400", "1055207007995813898"], // List of twitter users IDs,
     comandos: {
-        base: "$bot ",
-        start: base + "start",
-        test: base + "test",
+        base: comando,
+        start: comando + "start",
+        test: comando + "test",
     },
     mensajes: {
         init: "ShitBOT despierto. Esperando mensajes :)",
