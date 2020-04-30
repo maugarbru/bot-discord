@@ -1,46 +1,60 @@
 const Discord = require("discord.js");
 var Twit = require('twit')
-var config = require('./config')
+var config_base = require('./config/base')
+var config = require(`./config/${config_base.mode}`)
 var moment = require('moment-timezone')
 moment.locale("es")
 
-var T = new Twit(config.twitter_config)
+// Inicio de conexiones
+var T = new Twit(config_base.twitter)
 const client = new Discord.Client();
 var initiate = false
 
+/**
+ * Cuando se conecta correctamente
+ */
 client.on("ready", () => {
-    console.log("Bot despierto. Esperando mensajes :)");
+    console.log(config.mensajes.init);
 });
 
+/**
+ * Cuando hay un mensaje nuevo en Discord
+ */
 client.on("message", (message) => {
-    if (message.content.startsWith("$bot")) {
-        if (message.content.startsWith("$bot start")) {
+    // Comando base para identificar el bot
+    if (message.content.startsWith(config.comandos.base)) {
+
+        // Comando de inicio
+        if (message.content.startsWith(config.comandos.start)) {
             if (!initiate) {
-                message.channel.send("Iniciando... Ready para los tweets!", { files: [config.images.start] });
-                stream = T.stream('statuses/filter', { follow: config.twitter_user })
+                message.channel.send(config.mensajes.start, { files: [config.images.start] });
+                stream = T.stream('statuses/filter', { follow: config.users })
                 initiate = true
                 stream.on('tweet', function (tweet) {
                     var id_user = tweet.user.id_str;
                     var id = tweet.id_str;
-                    console.log(config.twitter_user.includes(id_user) + " // TweetID: " + config.twitter_tweet_url + id);
-
-                    if (config.twitter_user.includes(id_user)) {
+                    if (config.users.includes(id_user)) {
+                        console.log(config.users.includes(id_user) + " // Tweet: " + config_base.twitter_url + id);
                         var nombre = tweet.user.name
                         var dia = moment.tz(new Date(tweet.created_at), "America/Bogota").format("LLLL")
-                        message.channel.send(`Nuevo tweet de **${nombre}** el ${dia}. >${config.twitter_tweet_url}${id}`);
-                        console.log(`Tweet: ${nombre} - ${tweet.text}`);
+                        message.channel.send(`Nuevo tweet de **${nombre}** el ${dia}. >${config_base.twitter_url}${id}`);
                     }
                 })
             } else {
-                message.channel.send("Ya estoy encendido... :rage:", { files: [config.images.already] });
+                message.channel.send(config.mensajes.already, { files: [config.images.already] });
             }
-        } else if (message.content.startsWith("$bot test")) {
-            message.channel.send("Test de imagenes... :nerd:", { files: [config.images.test] });
+        // Comando de test
+        } else if (message.content.startsWith(config.comandos.test)) {
+            message.channel.send(config.mensajes.test, { files: [config.images.test] });
         } else {
-            message.channel.send("Comando desconocido.");
+            // Comando desconocido
+            message.channel.send(config.mensajes.unknown, { files: [config.images.unknown] });
         }
     }
 
 });
 
+/**
+ * Conexión al bot de discord
+ */
 client.login(config.discord_bot);
