@@ -3,7 +3,7 @@ config = {
     discord_bot: process.env.TOKEN,
     comandos: {
         base: comando,
-        play: comando + "start",
+        play: comando + "play",
         skip: comando + "skip",
         stop: comando + "stop",
     },
