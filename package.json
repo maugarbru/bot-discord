@@ -10,8 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.2.0",
+    "@discordjs/opus": "^0.5.3",
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
+    "ffmpeg": "^0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
     "moment-timezone": "^0.5.28",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "ytdl-core": "^4.9.1"
   }
 }
